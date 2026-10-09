@@ -1,0 +1,98 @@
+export const details = [
+  {
+    id: "1",
+    imageUrl: "/products/shoe1.png",
+    link: "category?electronic",
+    title: "Brand New Festival",
+    description1: "new collection",
+    discount: 45,
+    description2:
+      "As he dey Hot, Discover the lastest trends shoe, for Fashion, Sport and Lifestyle",
+    color: ["blue", "red"],
+    expire: 50,
+  },
+  {
+    id: "2",
+    imageUrl: "/products/watch1.png",
+    link: "category?cloth",
+    title: "Brand New Festival",
+    description1: "new collection",
+    discount: 45,
+    description2:
+      "As he dey Hot, Discover the lastest trends shoe, for Fashion, Sport and Lifestyle",
+    color: ["yellow", "red"],
+    expire: 50,
+  },
+  {
+    id: "3",
+    imageUrl: "/products/bag1.png",
+    link: "category?cloth",
+    title: "Brand New Festival",
+    description1: "new collection",
+    discount: 45,
+    description2:
+      "As he dey Hot, Discover the lastest trends shoe, for Fashion, Sport and Lifestyle",
+    color: ["blue", "purple"],
+    expire: 50,
+  },
+  {
+    id: "4",
+    imageUrl: "/products/mouse1.png",
+    link: "category?cloth",
+    title: "Brand New Festival",
+    description1: "new collection",
+    discount: 45,
+    description2:
+      "As he dey Hot, Discover the lastest trends shoe, for Fashion, Sport and Lifestyle",
+    color: ["blue", "green"],
+    expire: 50,
+  },
+  {
+    id: "5",
+    imageUrl: "/products/shoe.png",
+    link: "category?cloth",
+    title: "Brand New Festival",
+    description1: "new collection",
+    discount: 45,
+    description2:
+      "As he dey Hot, Discover the lastest trends shoe, for Fashion, Sport and Lifestyle",
+    color: ["blue", "yellow"],
+    expire: 50,
+  },
+  {
+    id: "6",
+    imageUrl: "/products/shoe.png",
+    link: "category?cloth",
+    title: "Brand New Festival",
+    description1: "new collection",
+    discount: 45,
+    description2:
+      "As he dey Hot, Discover the lastest trends shoe, for Fashion, Sport and Lifestyle",
+    color: ["blue", "yellow"],
+    expire: 50,
+  },
+  {
+    id: "7",
+    imageUrl: "/products/shoe.png",
+    link: "category?cloth",
+    title: "Brand New Festival",
+    description1: "new collection",
+    discount: 45,
+    description2:
+      "As he dey Hot, Discover the lastest trends shoe, for Fashion, Sport and Lifestyle",
+    color: ["blue", "yellow"],
+    expire: 50,
+  },
+  {
+    id: "8",
+    imageUrl: "/products/shoe.png",
+    link: "category?cloth",
+    title: "Brand New Festival",
+    description1: "new collection",
+    discount: 45,
+    description2:
+      "As he dey Hot, Discover the lastest trends shoe, for Fashion, Sport and Lifestyle",
+    color: ["blue", "yellow"],
+    expire: 50,
+  },
+];

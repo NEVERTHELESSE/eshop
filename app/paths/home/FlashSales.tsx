@@ -1,0 +1,69 @@
+import Image from "~/components/Image";
+import FlashSalesInfo from "./FlashSalesInfo";
+import Countdown from "~/components/Countdown";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router";
+import { useEffect, useState } from "react";
+import { supabase } from "~/lib/supabase";
+import CartLoading from "~/loading/CartLoading";
+import SCartLoading from "~/loading/SCartLoading";
+
+export default function FlashSales() {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    getProduct();
+  }, []);
+  type d = { data: any; error: any };
+  async function getProduct() {
+    const { data, error }: d = await supabase.from("product").select("*");
+    if (error) {
+      console.error(error);
+      return;
+    } else {
+      setProducts(data);
+    }
+  }
+
+  return (
+    <main className="w-full box shadow-lg my-4 rounded-2xl dark:bg-tertiaryD bg-tertiary  p-2 sm:p-4">
+      <div className="flex justify-between mb-3">
+        <div className="flex items-center">
+          <p className="text-2xl sm:text-4xl  text-white mr-3 font-bold  ">
+            Flash Sales
+          </p>
+          <Countdown />
+        </div>
+        <button className="cursor-pointer bg-white rounded-full py-1 px-2 sm:px-8 text-tertiary-600 flex items-center">
+          <span className="mr-2 hidden sm:block">See All</span>
+          <FiArrowRight />
+        </button>
+      </div>
+
+      {products.length > 1 ? (
+        <div className="flex overflow-hidden">
+          {products.map(({ id, src, numberOfItem, price, rate, title }) => (
+            <Link
+              // to={title}
+              to={title}
+              key={id}
+              className="box my-2 min-w-[49%]  md:w-[calc(100%/3.1)] lg:max-w-[calc(100%/5.2)] slg:min-w-[calc(100%/6.5)] mr-2 sm:mr-4 cursor-pointer overflow-hidden bg-white rounded-2xl"
+            >
+              <div className=" w-full h-70  hover:scale-105 duration-200 ">
+                <Image src={src[0]} alt="bass" />
+              </div>
+              <FlashSalesInfo
+                numberOfItem={numberOfItem}
+                price={price}
+                rate={rate}
+                title={title}
+              />
+            </Link>
+          ))}
+        </div>
+      ) : (
+        <SCartLoading />
+      )}
+    </main>
+  );
+}
