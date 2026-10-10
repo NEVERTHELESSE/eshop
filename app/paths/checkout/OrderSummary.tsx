@@ -17,13 +17,13 @@ export default function OrderSummary() {
           Order summary
         </h5>
         <div className="flex border-b border-b-soft py-2 justify-between">
-          <p>Item's total (1)</p> <h3>2,134,00</h3>
+          <p>Item's total (1)</p> <p>2,134,00</p>
         </div>
         <div className="flex border-b border-b-soft justify-between py-3">
-          <p>Delivery fees </p> <h3>1,700</h3>
+          <p>Delivery fees </p> <p>1,700</p>
         </div>
         <div className="flex border-b border-b-soft justify-between py-3">
-          <p>Total </p> <h3>2,169,700</h3>
+          <p>Total </p> <p>2,169,700</p>
         </div>
         <div className="flex border-b border-b-soft justify-between py-2">
           <div className="flex items-center justify-between w-full relative">

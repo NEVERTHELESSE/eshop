@@ -45,7 +45,7 @@ export default function FlashSales() {
           {products.map(({ id, src, numberOfItem, price, rate, title }) => (
             <Link
               // to={title}
-              to={title}
+              to={"/checkout"}
               key={id}
               className="box my-2 min-w-[49%]  md:w-[calc(100%/3.1)] lg:max-w-[calc(100%/5.2)] slg:min-w-[calc(100%/6.5)] mr-2 sm:mr-4 cursor-pointer overflow-hidden bg-white rounded-2xl"
             >
