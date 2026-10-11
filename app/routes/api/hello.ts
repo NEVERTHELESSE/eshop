@@ -2,14 +2,14 @@ import axios from "axios";
 import type { ActionFunctionArgs } from "react-router";
 import "dotenv/config";
 
-const secretKey = process.env.SECRETKEY;
+const key = process.env.SECRETKEY;
 
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.json();
   if (request.method !== "POST") {
     return Response.json({ message: "Method not allowed" }, { status: 405 });
   }
-  if (!secretKey) {
+  if (!key) {
     console.log("no key");
     return Response.json(
       { message: "Paystack secret key is missing" },
@@ -20,7 +20,7 @@ export async function action({ request }: ActionFunctionArgs) {
   const data = await axios
     .post("https://api.paystack.co/transaction/initialize", body, {
       headers: {
-        Authorization: `Bearer ${secretKey}`,
+        Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
       },
     })
