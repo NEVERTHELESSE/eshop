@@ -2,7 +2,7 @@ import axios from "axios";
 import type { ActionFunctionArgs } from "react-router";
 import "dotenv/config";
 
-const key = process.env.SECRETKEY;
+const key = process.env.KEY;
 
 export async function action({ request }: ActionFunctionArgs) {
   const body = await request.json();
@@ -11,10 +11,7 @@ export async function action({ request }: ActionFunctionArgs) {
   }
   if (!key) {
     console.log("no key");
-    return Response.json(
-      { message: "Paystack secret key is missing" },
-      { status: 500 }
-    );
+    return Response.json({ message: "key is missing" }, { status: 500 });
   }
   console.log(body);
   const data = await axios
