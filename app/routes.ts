@@ -10,4 +10,6 @@ export default [
   route("checkout", "routes/checkout.tsx"),
   route("admin", "routes/admin.tsx"),
   route("seller", "routes/seller.tsx"),
+  route("api/hello", "routes/api/hello.ts"),
+  route("api/payment", "routes/api/payment.ts"),
 ] satisfies RouteConfig;

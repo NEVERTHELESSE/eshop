@@ -9,3 +9,21 @@
 .glow {
   backdrop-filter: blur(30px);
 }
+
+:root {
+  --angle: 10deg;
+  --roll: 250 66% 61%;
+}
+
+@keyframes rotate {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
+.animateButton {
+  background: linear-gradient(var(--angle), blue, red);
+  animation: rotate 0.5s infinite;
+}

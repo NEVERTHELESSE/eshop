@@ -1,34 +1,53 @@
 import { useState, type ChangeEvent } from "react";
 import Image from "~/components/Image";
 import { supabase } from "~/lib/supabase";
-
+import { toast } from "react-toastify";
 export default function AdminAddProduct() {
   const [src, setSrc] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [productDetails, setProductDetails] = useState({
     title: "",
     description: "",
-    productImage: [""],
+    src: [""],
     discount: [],
     price: 0,
-    numberOfItems: 0,
+    numberOfProduct: 0,
+    quantity: 0,
   });
   async function addProduct(e: any) {
     e.preventDefault();
+    setLoading(true);
 
     const { data, error } = await supabase
       .from("product")
       .insert({
         title: productDetails.title,
         price: productDetails.price,
-        productImage: [src],
+        src: [src],
+        discount: productDetails.discount,
+        numberOfProduct: productDetails.numberOfProduct,
+        quantity: productDetails.quantity,
+        description: productDetails.description,
       })
       .select();
     if (error) {
-      console.log(error);
-      return;
+      toast("There was an error while adding product kidnly try again", {
+        type: "error",
+      });
+      setLoading(false);
+    } else {
+      toast("Product successfully added", { type: "success" });
+      setProductDetails({
+        title: "",
+        description: "",
+        discount: [],
+        src: [],
+        price: 0,
+        numberOfProduct: 0,
+        quantity: 0,
+      });
+      setLoading(false);
     }
-    console.log("insertId:", data);
   }
 
   function changeFile(e: any) {
@@ -44,6 +63,8 @@ export default function AdminAddProduct() {
             <p>Title</p>
             <input
               type="text"
+              minLength={10}
+              required
               className="p-6 w-full rounded-2xl  border  "
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setProductDetails((prev) => ({
@@ -58,6 +79,8 @@ export default function AdminAddProduct() {
               <p>Price</p>
               <input
                 type="number"
+                minLength={1}
+                required
                 className="p-6 w-full rounded-2xl  border  "
                 onChange={(e: any) =>
                   setProductDetails((prev) => ({
@@ -72,6 +95,7 @@ export default function AdminAddProduct() {
               <input
                 placeholder="30% (Optional)"
                 className="p-6 w-full rounded-2xl  border  "
+
                 type="number"
                 onChange={(e: any) =>
                   setProductDetails((prev) => ({
@@ -82,22 +106,43 @@ export default function AdminAddProduct() {
               />
             </div>
           </div>
-          <div className="w-full mb-2">
-            <p>Number of product that's available</p>
-            <input
-              type="text"
-              className="p-6 w-full rounded-2xl  border  "
-              onChange={(e: any) =>
-                setProductDetails((prev) => ({
-                  ...prev,
-                  numberOfItems: e.target.value,
-                }))
-              }
-            />
+          <div className="flex">
+            <div className="w-full mb-2 mr-2">
+              <p>Number of product</p>
+              <input
+                type="text"
+                minLength={1}
+                required
+                className="p-6 w-full rounded-2xl  border  "
+                onChange={(e: any) =>
+                  setProductDetails((prev) => ({
+                    ...prev,
+                    numberOfItems: e.target.value,
+                  }))
+                }
+              />
+            </div>
+            <div className="w-full mb-2">
+              <p>Quantity</p>
+              <input
+                type="text"
+                minLength={1}
+                required
+                className="p-6 w-full rounded-2xl  border  "
+                onChange={(e: any) =>
+                  setProductDetails((prev) => ({
+                    ...prev,
+                    quantity: e.target.value,
+                  }))
+                }
+              />
+            </div>
           </div>
           <div className="w-full mb-2">
             <p>Description</p>
             <textarea
+              minLength={10}
+              required
               className="p-6 w-full rounded-2xl  border  "
               onChange={(e: any) =>
                 setProductDetails((prev) => ({
@@ -113,7 +158,7 @@ export default function AdminAddProduct() {
             type="text"
             className="p-4 rounded-lg border w-full "
             placeholder="Paste image url here"
-            onPasteCapture={(e: any) => setSrc(e.target.value)}
+            onChange={(e: any) => setSrc(e.target.value)}
           />
           <p className="text-center my-3">or</p>
           <div className="size-80 rounded-2xl border flex items-center justify-center flex-col relative">
@@ -134,7 +179,9 @@ export default function AdminAddProduct() {
           </div> */}
         </div>
       </div>
-      <button className="w-full bg-primary font-bold text-white p-3 rounded-2xl my-5 cursor-pointer">
+      <button
+        className={`w-full ${loading ? "bg-soft" : "bg-primary"} font-bold text-white p-3 rounded-2xl my-5 cursor-pointer`}
+      >
         Add Product
       </button>
     </form>

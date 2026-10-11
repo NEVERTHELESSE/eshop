@@ -1,6 +1,7 @@
 import Image from "~/components/Image";
 import JumiaExpress from "~/components/JumiaExpress";
 import AddRemove from "./AddRemove";
+import CartChange from "../product/CartChange";
 
 export default function ProductShow() {
   return (
@@ -12,10 +13,10 @@ export default function ProductShow() {
         </div>
         <div className="flex justify-between mx-3">
           <div className="flex flex-col justify-between">
-            <h3>
+            <p>
               ECOFLOW DELTA 3 ULTRA Portable Power Station, 3600W Output Home
               Power, 3072wh LifeP04 Battery, Portable Solar Generator
-            </h3>
+            </p>
             <p className="text-primary-300">Few units left</p>
             <JumiaExpress />
           </div>
@@ -25,6 +26,7 @@ export default function ProductShow() {
         </div>
       </div>
       <AddRemove />
+      {/* <CartChange /> */}
     </main>
   );
 }

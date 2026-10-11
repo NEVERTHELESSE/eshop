@@ -6,7 +6,7 @@ import Navigation from "./Navigation";
 import Theme from "./Theme";
 
 export default function Header() {
-  const [account, setAccount] = useState(false);
+  const [account, setAccount] = useState(true);
 
   return (
     <div className="w-full">
@@ -15,8 +15,8 @@ export default function Header() {
           <Logo />
         </div>
         <Navigation />
-        {account ? <HeaderOption /> : <FreshAccount />}
         <Theme />
+        {account ? <HeaderOption /> : <FreshAccount />}
       </header>
       <div className="w-full h-10 md:h-18"></div>
     </div>

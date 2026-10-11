@@ -1,10 +1,16 @@
 import { useState } from "react";
-import { AiFillQuestionCircle } from "react-icons/ai";
-import { BsQuestionCircle, BsWhatsapp } from "react-icons/bs";
-import { FaHeart } from "react-icons/fa";
-import { FiMessageSquare, FiShoppingCart, FiUser } from "react-icons/fi";
+import { useCartStore } from "../store/store";
+
+import {
+  FiBell,
+  FiHeart,
+  FiMessageSquare,
+  FiShoppingCart,
+  FiUser,
+} from "react-icons/fi";
 import { Link } from "react-router";
 import { accounts, options } from "~/data/navigates";
+import HelpDetail from "./HelpDetail";
 
 export default function HeaderOption() {
   const [showAccountDetail, setShowAccountDetail] = useState(false);
@@ -20,8 +26,10 @@ export default function HeaderOption() {
     setShowAccountDetail(showAccountDetail && !showAccountDetail);
   }
 
+  const count = useCartStore((state) => state.count);
+
   const buttonStyle =
-    "items-center flex relative ml-2 cursor-pointer hover:bg-soft p-1  rounded-lg ";
+    "items-center flex relative ml-2 relative cursor-pointer hover:bg-soft p-1  rounded-lg ";
   return (
     <section className="flex">
       <main className={buttonStyle}>
@@ -31,7 +39,7 @@ export default function HeaderOption() {
           onClick={toggleAccountDetail}
           className={buttonStyle}
         >
-          <FiUser className="text-2xl sm:text-1xl mx-2" />
+          <FiUser className="text-2xl lg:mx-8  mx-2" />
         </button>
 
         <section
@@ -48,7 +56,7 @@ export default function HeaderOption() {
               {accounts.map(({ id, title, icon }) => (
                 <li
                   key={id}
-                  className="p-2 my-2 flex cursor-pointer hover:bg-soft rounded-lg  items-center"
+                  className="p-2 my-2  flex cursor-pointer hover:bg-soft rounded-lg  items-center"
                 >
                   <span className=" mr-3">{icon}</span>
                   {title}
@@ -64,33 +72,20 @@ export default function HeaderOption() {
           className=" items-center hidden sm:flex cursor-pointer"
           title="favorite"
         >
-          <FaHeart className="text-2xl mx-2 sm:text-1xl" />
+          <FiHeart className="text-2xl  lg:mx-4 mx-2 sm:text-1xl" />
         </button>
-        <section
-          className={`absolute top-10 w-50 shadow p-2 rounded-lg ${showHelpDetail ? "flex " : "hidden"}`}
-        >
-          <ul className="w-full p-2 my-2 rounded-lg bg-white">
-            {options.map((option) => (
-              <li
-                key={option}
-                className="p-2 flex cursor-pointer hover:bg-soft rounded-lg  items-center"
-              >
-                {option}
-              </li>
-            ))}
-            <button className="primary w-full p-2 rounded-lg shadow my-2 flex justify-center items-center ">
-              <FiMessageSquare />
-              <span className="ml-2 ">Live Chat</span>
-            </button>
-            <button className="border-green-400 border w-full p-2 rounded-lg shadow flex text-green-400 justify-center items-center ">
-              <BsWhatsapp />
-              <span className="ml-2">Whatsapp</span>
-            </button>
-          </ul>
-        </section>
+        <HelpDetail showHelpDetail={showHelpDetail} />
       </main>
       <Link to="/cart" className={buttonStyle} title="favorite">
-        <FiShoppingCart className="text-2xl mx-2 sm:text-1xl" />
+        {count != 0 && (
+          <div className="absolute rounded-full size-5 top-0 right-0 flex justify-center items-center text-white font-bold bg-red-500">
+            <p>{count}</p>
+          </div>
+        )}
+        <FiShoppingCart className="text-2xl lg:mx-4 mx-2 sm:text-1xl" />
+      </Link>
+      <Link to="/cart" className={buttonStyle} title="favorite">
+        <FiBell className="text-2xl lg:mx-4 mx-2 sm:text-1xl" />
       </Link>
     </section>
   );

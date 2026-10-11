@@ -7,6 +7,7 @@ export default function Cart() {
     <main>
       <div className="flex w-full my-6 ">
         <ProductShow />
+
         <CartSummary />
       </div>
       <Suspense fallback="loading">

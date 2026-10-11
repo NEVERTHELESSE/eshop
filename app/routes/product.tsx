@@ -11,7 +11,7 @@ import StoreBrand from "~/paths/product/StoreBrand";
 export default function product() {
   const lists = Array.from({ length: 9 }, (_, i: number) => i + 10);
   const SponsoredProduct = lazy(
-    () => import("../paths/product/SponsoredProducts"),
+    () => import("../paths/product/SponsoredProducts")
   );
   return (
     <section className="flex  my-8 ">

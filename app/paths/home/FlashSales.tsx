@@ -43,14 +43,15 @@ export default function FlashSales() {
       {products.length > 1 ? (
         <div className="flex overflow-hidden">
           {products.map(({ id, src, numberOfItem, price, rate, title }) => (
-            <Link
+            <div
               // to={title}
-              to={"/checkout"}
               key={id}
-              className="box my-2 min-w-[49%]  md:w-[calc(100%/3.1)] lg:max-w-[calc(100%/5.2)] slg:min-w-[calc(100%/6.5)] mr-2 sm:mr-4 cursor-pointer overflow-hidden bg-white rounded-2xl"
+              className="box my-2 min-w-[49%]  md:w-[calc(100%/3.1)] lg:max-w-[calc(100%/6.2)] slg:min-w-[calc(100%/6.5)] mr-2 sm:mr-4 cursor-pointer overflow-hidden bg-white rounded-2xl"
             >
               <div className=" w-full h-70  hover:scale-105 duration-200 ">
-                <Image src={src[0]} alt="bass" />
+                <Link to={`product?${id}`}>
+                  <Image src={src[0]} alt="bass" />
+                </Link>
               </div>
               <FlashSalesInfo
                 numberOfItem={numberOfItem}
@@ -58,7 +59,7 @@ export default function FlashSales() {
                 rate={rate}
                 title={title}
               />
-            </Link>
+            </div>
           ))}
         </div>
       ) : (
