@@ -1,4 +1,4 @@
-import type { FormEvent } from "react";
+import { type FormEvent } from "react";
 import { FaSearch } from "react-icons/fa";
 import Image from "./Image";
 import FlashSalesInfo from "~/paths/home/FlashSalesInfo";

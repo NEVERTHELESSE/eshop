@@ -11,7 +11,7 @@ export default function HelpDetail({ showHelpDetail }: propT) {
     <section
       className={`absolute top-10 w-50 shadow p-2 rounded-lg ${showHelpDetail ? "flex " : "hidden"}`}
     >
-      <ul className="w-full p-2 my-2 rounded-lg bg-white">
+      <ul className="w-full p-2 my-2 rounded-lg dark:bg-softD bg-soft">
         {options.map((option) => (
           <li
             key={option}

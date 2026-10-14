@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
+import { toast } from "react-toastify";
 import Image from "~/components/Image";
 import { details } from "~/data/heroData";
 import { supabase } from "~/lib/supabase";
@@ -28,10 +29,9 @@ export default function Hero() {
   async function getProduct() {
     const { data, error }: d = await supabase.from("hero").select("*");
     if (error) {
-      console.log(error);
+      toast("There was an error while getting your data", { type: "error" });
       return;
     } else {
-      console.log(data);
       setProducts(data);
     }
   }

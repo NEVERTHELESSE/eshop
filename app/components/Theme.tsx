@@ -13,7 +13,7 @@ export default function Theme() {
   return (
     <div>
       <button className="cursor-pointer ml-2 text-2xl" onClick={changeTheme}>
-        {isLight ? <FaMoon /> : <FaSun className="text-white" />}
+        {isLight ? <FaMoon /> : <FaSun />}
       </button>
     </div>
   );

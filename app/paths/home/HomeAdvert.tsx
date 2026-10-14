@@ -13,9 +13,9 @@ export default function HomeAdvert() {
 
   return (
     <main className="w-full box  flex px-2 py-4 rounded-2xl h-60 overflow-hidden justify-between my-7">
-      {adverts.map((advert) => (
+      {adverts.map((advert, index) => (
         <div
-          key={advert}
+          key={index}
           className=" cursor-pointer min-w-[47%] sm:min-w-50 m-1 md:mx-2 flex items-center justify-center bg-soft rounded-2xl overflow-hidden h-full"
         >
           <Image src={advert} alt={advert} />

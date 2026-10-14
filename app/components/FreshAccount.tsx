@@ -1,6 +1,7 @@
 import { useState } from "react";
 import AnimateButton from "./AnimateButton";
 import { Link } from "react-router";
+import { MdMenu } from "react-icons/md";
 
 export default function FreshAccount() {
   const [active, setActive] = useState(false);
@@ -9,6 +10,7 @@ export default function FreshAccount() {
   }
   return (
     <div className="relative">
+      <MdMenu />
       <button
         className="bg-linear-0 from-primary to-tertiary p-2 sm:px-10 text-white  rounded-full shadow cursor-pointer"
         onClick={toggleActive}

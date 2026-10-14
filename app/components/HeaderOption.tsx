@@ -1,13 +1,7 @@
 import { useState } from "react";
 import { useCartStore } from "../store/store";
 
-import {
-  FiBell,
-  FiHeart,
-  FiMessageSquare,
-  FiShoppingCart,
-  FiUser,
-} from "react-icons/fi";
+import { FiBell, FiHeart, FiShoppingCart, FiUser } from "react-icons/fi";
 import { Link } from "react-router";
 import { accounts, options } from "~/data/navigates";
 import HelpDetail from "./HelpDetail";
@@ -31,7 +25,7 @@ export default function HeaderOption() {
   const buttonStyle =
     "items-center flex relative ml-2 relative cursor-pointer hover:bg-soft p-1  rounded-lg ";
   return (
-    <section className="flex">
+    <section className="flex ">
       <main className={buttonStyle}>
         <button
           title="favorite"
@@ -43,7 +37,7 @@ export default function HeaderOption() {
         </button>
 
         <section
-          className={`absolute   bg-white top-10 w-50 shadow p-2 rounded-lg ${showAccountDetail ? "flex " : "hidden"}`}
+          className={`absolute bg-soft dark:bg-softD top-10 w-50 shadow p-2 rounded-lg ${showAccountDetail ? "flex " : "hidden"}`}
         >
           <div className="w-full ">
             <Link

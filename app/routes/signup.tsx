@@ -9,16 +9,11 @@ import {
 } from "react-icons/fa";
 
 import { toast } from "react-toastify";
-import { Link } from "react-router";
+import { Link, useNavigate, useNavigation } from "react-router";
 import Logo from "~/components/Logo";
-import { supabase } from "~/lib/supabase";
+import axios from "axios";
 
 export default function signup() {
-  // const [username, setUsername] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  // const [hidePassword, setHidePassword] = useState(true);
   const [userInfo, setUserInfo] = useState({
     username: "",
     email: "",
@@ -30,34 +25,33 @@ export default function signup() {
   function togglePasswordShow() {
     setUserInfo((prev) => ({ ...prev, hidePassword: !userInfo.hidePassword }));
   }
+  const navigate = useNavigate();
   async function createAccount(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    if (userInfo.password === userInfo.confirmPassword) {
-      const { data, error } = await supabase
-        .from("user")
-        .insert({
-          username: userInfo.username,
-          email: userInfo.email,
-          password: userInfo.password,
-        })
-        .select();
-      if (error) {
-        if (error.code == "23505") {
-          toast("User already exist ", { type: "warning" });
-        } else {
-          toast(
-            "There was an error while creating your account, Kindly try again",
-            { type: "error" }
-          );
-        }
-        return;
-      } else {
-        toast("User successfully created ", { type: "success" });
-      }
-    } else {
-      toast("Passwod not match", { type: "warning" });
+    if (userInfo.password !== userInfo.confirmPassword) {
+      toast("Password not match");
     }
+    const url = import.meta.env.VITE_APIURL;
+    await axios
+      .post(url + "newaccount", { userInfo })
+      .then((res) => {
+        if (res.data.message == "User already exist") {
+          toast("User already exist", { type: "warning" });
+        } else if (res.data.message == "User successfully added") {
+          toast("User successfully created", { type: "success", delay: 2 });
+          navigate("/");
+        } else {
+          toast("There was an error while creating user", { type: "error" });
+        }
+
+        // navigate(-1);
+      })
+      .catch((error) => {
+        toast(
+          "There was an error while creating a user, kindly try again later"
+        );
+      });
   }
 
   return (

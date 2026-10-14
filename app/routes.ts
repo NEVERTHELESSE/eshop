@@ -12,4 +12,9 @@ export default [
   route("seller", "routes/seller.tsx"),
   route("api/hello", "routes/api/hello.ts"),
   route("api/payment", "routes/api/payment.ts"),
+  route("api/loginToken", "routes/api/loginToken.ts"),
+  route("api/signup", "routes/api/signup.ts"),
+  route("api/me", "routes/api/me.ts"),
+  route("api/newaccount", "routes/api/newAccount.ts"),
+  route("api/verify", "routes/api/verify.ts"),
 ] satisfies RouteConfig;

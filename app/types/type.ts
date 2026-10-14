@@ -3,11 +3,14 @@ export type ImageT = {
   alt: string;
 };
 
-export type flashSaleType = {
-  numberOfItem: number;
+export type productType = {
   title: string;
   price: number;
   rate: number;
+  id: number;
+  src: string[];
+  created_at: string;
+  numberofItem: number;
 };
 export type productDetailType = {
   title: string;

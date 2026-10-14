@@ -1,37 +1,50 @@
 import { FaShoppingCart, FaStar } from "react-icons/fa";
-import Image from "~/components/Image";
+import { toast } from "react-toastify";
+import { supabase } from "~/lib/supabase";
 import { useCartStore } from "~/store/store";
-import type { flashSaleType } from "~/types/type";
+import type { productType } from "~/types/type";
 
-export default function FlashSalesInfo({
-  numberOfItem,
-  title,
-  price,
-  rate,
-}: flashSaleType) {
-  const addItem = useCartStore((state) => state.addItem);
+export default function FlashSalesInfo(cart: productType) {
+  const email = useCartStore((state) => state.user.email);
+  const carts = useCartStore((state) => state.carts);
+
+  async function addItem() {
+    const { data, error } = await supabase
+      .from("user")
+      .update({ orders: [...carts, cart] })
+      .eq("email", email)
+      .select();
+    if (error) {
+      toast("There was an error while updateing your cart", { type: "error" });
+      console.error(error.message);
+    } else {
+      toast("Product succesfully added to cart", { type: "success" });
+      console.log(data);
+    }
+    // useCartStore((state) => state.addItem)
+  }
 
   return (
     <div className="w-full  ">
-      {numberOfItem != 0 && (
+      {cart.numberofItem != 0 && (
         <p className="bg-yellow-200 text-center">
-          {numberOfItem} items in stock
+          {cart.numberofItem} items in stock
         </p>
       )}
       <div className="p-2">
         <p className="whitespace-nowrap overflow-hidden text-ellipsis">
-          {title}
+          {cart.title}
         </p>
         <div className="flex items-center">
           <FaStar size={15} className="text-primary" />
-          <h4 className="mx-1">{rate}</h4>
+          <h4 className="mx-1">{cart.rate}</h4>
           <p>(1848844)</p>
         </div>
         <div className="flex pr-1 items-center justify-between">
           <div>
             <p>(1848844)</p>
             <div className="flex my-2 items-center">
-              <h4>₦ {price.toLocaleString()}</h4>
+              <h4>₦ {cart.price.toLocaleString()}</h4>
               <h6 className="ml-2 bg-green-600 px-1 text-white rounded-lg">
                 -46%
               </h6>

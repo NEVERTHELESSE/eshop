@@ -1,4 +1,5 @@
 import { ToastContainer, toast } from "react-toastify";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   isRouteErrorResponse,
   Links,
@@ -27,6 +28,16 @@ export const links: Route.LinksFunction = () => [
   },
 ];
 
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 30, // 30 minutes
+      retry: 1,
+    },
+  },
+});
+
 const Footer = lazy(() => import("./components/footer/Footer"));
 export function Layout({ children }: { children: React.ReactNode }) {
   const resistHeader = ["/signup", "/login", "/admin"];
@@ -43,28 +54,30 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body className=" dark:bg-darkBg duration-150 ease-in flex flex-col overflow-x-hidden items-center light">
-        <ToastContainer
-          position="top-right"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick={false}
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-        />
+      <QueryClientProvider client={queryClient}>
+        <body className=" dark:bg-darkBg dark duration-150 ease-in flex flex-col overflow-x-hidden items-center light">
+          <ToastContainer
+            position="top-right"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick={false}
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
 
-        {!resistHeader.includes(locate) && <Header />}
-        <section className="w-full p-2 sm:p-4 slg:px-30">{children}</section>
-        <Suspense fallback="loading">
-          <Footer />
-        </Suspense>
-        <ScrollRestoration />
-        <Scripts />
-      </body>
+          {!resistHeader.includes(locate) && <Header />}
+          <section className="w-full p-2 sm:p-4 slg:px-30">{children}</section>
+          <Suspense fallback="loading">
+            <Footer />
+          </Suspense>
+          <ScrollRestoration />
+          <Scripts />
+        </body>
+      </QueryClientProvider>
     </html>
   );
 }

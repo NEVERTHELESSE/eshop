@@ -21,7 +21,7 @@
   --color-cover: white;
   --color-secondary-500: green;
   --color-soft: rgb(220, 216, 216);
-  --color-softD: purple;
+  --color-softD: rgb(75, 75, 75);
   --color-load: gray;
   --color-bg: rgb(228, 228, 228);
   --color-darkBg: #1d1d1f;
@@ -31,7 +31,6 @@
 
 body {
   font-family: sans-serif;
-  /* backgrouond: rgb(15, 52, 88); */
 }
 
 h2 {

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import {
   FaApple,
@@ -7,8 +8,10 @@ import {
   FaGoogle,
 } from "react-icons/fa";
 import { Link } from "react-router";
+import { toast } from "react-toastify";
 import Logo from "~/components/Logo";
 import { supabase } from "~/lib/supabase";
+import Remember from "./Remember";
 
 export default function login() {
   const [email, setEmail] = useState("");
@@ -18,20 +21,11 @@ export default function login() {
   function togglePasswordShow() {
     setHidePassword((prev) => !prev);
   }
-
+  // const url = process.env.VITE_APIURL;
+  const url = "http://localhost:5173/api/";
   async function loginUser(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const { data, error } = await supabase
-      .from("user")
-      .insert({
-        email,
-        password,
-      })
-      .select();
-    if (error) {
-      console.log(error);
-      return;
-    }
+    toast("login");
   }
 
   return (
@@ -83,7 +77,7 @@ export default function login() {
               />
             )}
           </div>
-
+          <Remember />
           <button
             title="Fill all the field and continue"
 

@@ -7,23 +7,36 @@ import { useEffect, useState } from "react";
 import { supabase } from "~/lib/supabase";
 import CartLoading from "~/loading/CartLoading";
 import SCartLoading from "~/loading/SCartLoading";
+import type { productType } from "~/types/type";
+import { useQuery } from "@tanstack/react-query";
+import { toast } from "react-toastify";
 
 export default function FlashSales() {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    getProduct();
-  }, []);
   type d = { data: any; error: any };
-  async function getProduct() {
-    const { data, error }: d = await supabase.from("product").select("*");
-    if (error) {
-      console.error(error);
-      return;
-    } else {
-      setProducts(data);
-    }
+  function getProduct() {
+    return useQuery({
+      queryKey: ["products"],
+      queryFn: async () => {
+        const { data, error }: d = await supabase.from("product").select("*");
+        if (error) {
+          toast(
+            "There was an error while loading product, kindly check you internet connection",
+            { type: "error" }
+          );
+        } else {
+          return data;
+        }
+      },
+    });
+
+    // if (error) {
+    //   console.error(error);
+    //   return;
+    // } else {
+    //   setProducts(data);
+    // }
   }
+  const { data, isPending, isError } = getProduct();
 
   return (
     <main className="w-full box shadow-lg my-4 rounded-2xl dark:bg-tertiaryD bg-tertiary  p-2 sm:p-4">
@@ -39,31 +52,32 @@ export default function FlashSales() {
           <FiArrowRight />
         </button>
       </div>
-
-      {products.length > 1 ? (
+      {isPending || isError ? (
+        <SCartLoading />
+      ) : (
         <div className="flex overflow-hidden">
-          {products.map(({ id, src, numberOfItem, price, rate, title }) => (
+          {data.map((product: productType) => (
             <div
               // to={title}
-              key={id}
+              key={product.id}
               className="box my-2 min-w-[49%]  md:w-[calc(100%/3.1)] lg:max-w-[calc(100%/6.2)] slg:min-w-[calc(100%/6.5)] mr-2 sm:mr-4 cursor-pointer overflow-hidden bg-white rounded-2xl"
             >
               <div className=" w-full h-70  hover:scale-105 duration-200 ">
-                <Link to={`product?${id}`}>
-                  <Image src={src[0]} alt="bass" />
+                <Link to={`product?${product.id}`}>
+                  <Image src={product.src[0]} alt="bass" />
                 </Link>
               </div>
               <FlashSalesInfo
-                numberOfItem={numberOfItem}
-                price={price}
-                rate={rate}
-                title={title}
+                id={product.id}
+                numberOfItem={product.numberOfItem}
+                title={product.title}
+                price={product.price}
+                src={product.src}
+                rate={product.rate}
               />
             </div>
           ))}
         </div>
-      ) : (
-        <SCartLoading />
       )}
     </main>
   );
