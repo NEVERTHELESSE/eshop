@@ -7,7 +7,7 @@ import {
   FaEyeSlash,
   FaGoogle,
 } from "react-icons/fa";
-import { Link } from "react-router";
+import { Form, Link, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import Logo from "~/components/Logo";
 import { supabase } from "~/lib/supabase";
@@ -22,21 +22,40 @@ export default function login() {
     setHidePassword((prev) => !prev);
   }
   // const url = process.env.VITE_APIURL;
-  const url = "http://localhost:5173/api/";
+  const navigate = useNavigate();
   async function loginUser(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    toast("login");
+    const url = import.meta.env.VITE_APIURL;
+
+    await axios
+      .post(`${url}login`, { email, password })
+      .then((res) => {
+        if (res.data.message === "Succesfully login") {
+          toast("User successfully login", { type: "success" });
+          navigate("/");
+        } else {
+          toast("invalid username or password", { type: "warning" });
+        }
+      })
+      .catch((error) =>
+        toast(
+          "There was an error while getting user info, kindly try again later",
+          { type: "error" }
+        )
+      );
   }
 
   return (
     <main className="w-screen flex-col flex items-center justify-center h-screen -ml-20 ">
       <div className="w-100 flex flex-col justify-center items-center rounded-2xl bg-white shadow-2xl sm:p-6 my-4">
         <Logo />
-        <form action="" className="w-full" onSubmit={loginUser}>
+        <form method="post" className="w-full" onSubmit={loginUser}>
           <h2 className="text-center">Welcome Back</h2>
           <div className="relative w-full flex items-center">
             <input
               type="email"
+              name="email"
+              id="email"
               required
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setEmail(e.target.value)
@@ -57,6 +76,8 @@ export default function login() {
               }
               minLength={6}
               required
+              name="password"
+              id="password"
 
               placeholder="Password"
               className="w-full border-soft shadow border my-3 p-4 rounded-lg  "

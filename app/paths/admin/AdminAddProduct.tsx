@@ -3,8 +3,13 @@ import Image from "~/components/Image";
 import { supabase } from "~/lib/supabase";
 import { toast } from "react-toastify";
 export default function AdminAddProduct() {
-  const [src, setSrc] = useState("");
+  const [src, setSrc] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
+
+  function addImage() {
+    setSrc((prev) => [...prev, productImage]);
+  }
+
   const [productDetails, setProductDetails] = useState({
     title: "",
     description: "",
@@ -14,22 +19,19 @@ export default function AdminAddProduct() {
     numberOfProduct: 0,
     quantity: 0,
   });
+  const [productImage, setProductImage] = useState("");
   async function addProduct(e: any) {
     e.preventDefault();
     setLoading(true);
-
-    const { data, error } = await supabase
-      .from("product")
-      .insert({
-        title: productDetails.title,
-        price: productDetails.price,
-        src: [src],
-        discount: productDetails.discount,
-        numberOfProduct: productDetails.numberOfProduct,
-        quantity: productDetails.quantity,
-        description: productDetails.description,
-      })
-      .select();
+    const { data, error } = await supabase.from("product").insert({
+      title: productDetails.title,
+      price: productDetails.price,
+      src,
+      discount: productDetails.discount,
+      numberOfProduct: productDetails.numberOfProduct,
+      quantity: productDetails.quantity,
+      description: productDetails.description,
+    });
     if (error) {
       toast("There was an error while adding product kidnly try again", {
         type: "error",
@@ -48,11 +50,6 @@ export default function AdminAddProduct() {
       });
       setLoading(false);
     }
-  }
-
-  function changeFile(e: any) {
-    const url = URL.createObjectURL(e.target.files[0]);
-    setSrc(url);
   }
 
   return (
@@ -158,25 +155,28 @@ export default function AdminAddProduct() {
             type="text"
             className="p-4 rounded-lg border w-full "
             placeholder="Paste image url here"
-            onChange={(e: any) => setSrc(e.target.value)}
+            onChange={(e: ChangeEvent<HTMLInputElement>) =>
+              setProductImage(e.target.value)
+            }
           />
           <p className="text-center my-3">or</p>
           <div className="size-80 rounded-2xl border flex items-center justify-center flex-col relative">
-            <h4 className="absolute text-2xl">Choose or Drop File here</h4>
-            {src != "" && <Image src={src} alt="image" />}
-            <input
-              type="file"
-              onChange={changeFile}
-
-              className="size-full absolute cursor-pointer opacity-0"
-            />
+            <h4 className="absolute text-2xl">
+              Paste your image url
+              <span>Local image isn't available for naw</span>
+            </h4>
+            {productImage != "" && <Image src={productImage} alt="image" />}
           </div>
-          <a download href={src}>
-            download
-          </a>
-          {/* <div className="flex mt-3">
-            <div className="border size-20"></div>
-          </div> */}
+          <button className="bg-secondary p-2" onClick={addImage}>
+            Add image
+          </button>
+          <div className="flex mt-3">
+            {src.map((s, index) => (
+              <div key={index} className="border size-20">
+                <Image src={s} alt={s} />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <button

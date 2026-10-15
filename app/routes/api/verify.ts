@@ -23,7 +23,11 @@ export async function loader({ request }: LoaderFunctionArgs) {
       .from("user")
       .select("email, username, profilePic")
       .eq("email", payload.email);
-
+    const cartNumber = await supabase
+      .from("user")
+      .select("carts", { count: "exact", head: true })
+      .eq("email", payload.email);
+    console.log(cartNumber);
     if (!ownerToken.success) {
       return Response.json(
         {
@@ -37,7 +41,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
     return Response.json(
       {
         message: "Token verfied successfully",
-        userid: payload.email,
+        user: ownerToken.data[0],
         sucess: true,
       },
       { status: 200 }

@@ -4,7 +4,6 @@ import HeaderOption from "./HeaderOption";
 import Logo from "./Logo";
 import Navigation from "./Navigation";
 import Theme from "./Theme";
-import { supabase } from "~/lib/supabase";
 import { useCartStore } from "~/store/store";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -14,8 +13,7 @@ export default function Header() {
 
   const [user, setUser] = useState(null);
 
-  const [account, setAccount] = useState(true);
-  const email = useCartStore((store) => store.user.email);
+  const addUser = useCartStore((state) => state.addUser);
   const getUser = () => {
     return useQuery({
       queryKey: ["user"],
@@ -23,6 +21,12 @@ export default function Header() {
         const url = import.meta.env.VITE_APIURL;
         const { data } = await axios.get(`${url}verify`, {
           withCredentials: true,
+        });
+        console.log(data.user);
+        addUser({
+          email: data.user.email,
+          username: data.user.username,
+          profilePic: data.user.profilePic,
         });
         return data;
       },

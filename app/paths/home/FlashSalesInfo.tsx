@@ -9,11 +9,10 @@ export default function FlashSalesInfo(cart: productType) {
   const carts = useCartStore((state) => state.carts);
 
   async function addItem() {
-    const { data, error } = await supabase
-      .from("user")
-      .update({ orders: [...carts, cart] })
-      .eq("email", email)
-      .select();
+    const { data, error } = await supabase.rpc("add_to_carts", {
+      user_id_input: 5,
+      new_item: cart,
+    });
     if (error) {
       toast("There was an error while updateing your cart", { type: "error" });
       console.error(error.message);

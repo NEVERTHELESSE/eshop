@@ -1,76 +1,20 @@
-import { useState } from "react";
 import { useCartStore } from "../store/store";
 
-import { FiBell, FiHeart, FiShoppingCart, FiUser } from "react-icons/fi";
+import { FiBell, FiHeart, FiShoppingCart } from "react-icons/fi";
 import { Link } from "react-router";
-import { accounts, options } from "~/data/navigates";
-import HelpDetail from "./HelpDetail";
+import Image from "./Image";
 
 export default function HeaderOption() {
-  const [showAccountDetail, setShowAccountDetail] = useState(false);
-  const [showHelpDetail, setShowHelpDetail] = useState(false);
-
-  function toggleAccountDetail() {
-    setShowAccountDetail(!showAccountDetail);
-    setShowHelpDetail(showHelpDetail && !showHelpDetail);
-  }
-
-  function toggleHelpDetails() {
-    setShowHelpDetail(!showHelpDetail);
-    setShowAccountDetail(showAccountDetail && !showAccountDetail);
-  }
-
   const count = useCartStore((state) => state.count);
+  const username = useCartStore((state) => state.user.username);
 
   const buttonStyle =
     "items-center flex relative ml-2 relative cursor-pointer hover:bg-soft p-1  rounded-lg ";
   return (
     <section className="flex ">
-      <main className={buttonStyle}>
-        <button
-          title="favorite"
+      <main className={buttonStyle}></main>
 
-          onClick={toggleAccountDetail}
-          className={buttonStyle}
-        >
-          <FiUser className="text-2xl lg:mx-8  mx-2" />
-        </button>
-
-        <section
-          className={`absolute bg-soft dark:bg-softD top-10 w-50 shadow p-2 rounded-lg ${showAccountDetail ? "flex " : "hidden"}`}
-        >
-          <div className="w-full ">
-            <Link
-              to="/login"
-              className="primary flex w-full p-2 rounded-lg shadow "
-            >
-              Sign In
-            </Link>
-            <ul>
-              {accounts.map(({ id, title, icon }) => (
-                <li
-                  key={id}
-                  className="p-2 my-2  flex cursor-pointer hover:bg-soft rounded-lg  items-center"
-                >
-                  <span className=" mr-3">{icon}</span>
-                  {title}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      </main>
-      <main className={buttonStyle}>
-        <button
-          onClick={toggleHelpDetails}
-          className=" items-center hidden sm:flex cursor-pointer"
-          title="favorite"
-        >
-          <FiHeart className="text-2xl  lg:mx-4 mx-2 sm:text-1xl" />
-        </button>
-        <HelpDetail showHelpDetail={showHelpDetail} />
-      </main>
-      <Link to="/cart" className={buttonStyle} title="favorite">
+      <Link to="/cart" className={buttonStyle} title="My Cart">
         {count != 0 && (
           <div className="absolute rounded-full size-5 top-0 right-0 flex justify-center items-center text-white font-bold bg-red-500">
             <p>{count}</p>
@@ -78,9 +22,24 @@ export default function HeaderOption() {
         )}
         <FiShoppingCart className="text-2xl lg:mx-4 mx-2 sm:text-1xl" />
       </Link>
-      <Link to="/cart" className={buttonStyle} title="favorite">
+      <main className={buttonStyle}>
+        <Link
+          to="/favorite"
+          className=" items-center hidden sm:flex cursor-pointer"
+          title="favorite"
+        >
+          <FiHeart className="text-2xl  lg:mx-4 mx-2 sm:text-1xl" />
+        </Link>
+      </main>
+      <Link to="/notification" className={buttonStyle} title="Notification">
         <FiBell className="text-2xl lg:mx-4 mx-2 sm:text-1xl" />
       </Link>
+      <div
+        className="size-12 rounded-full lg:ml-8 border border-primary overflow-hidden"
+        title={username === null ? "loading" : username}
+      >
+        <Image src="/users/neverthelesse.png" alt="profilePics" />
+      </div>
     </section>
   );
 }
