@@ -8,12 +8,12 @@ const AdminOrder = lazy(() => import("../paths/admin/AdminOrder"));
 export default function admin() {
   const [active, setActive] = useState("Dashboard");
 
-  const [isAdmin, setIsAdmin] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   return (
     <section className="w-full  flex items-center ">
       {isAdmin ? (
-        <main className="p-8 h-screen ">
+        <main className="p-2 sm:p-8 h-screen w-full">
           <div className="w-full h-full shadow  shadow-4xl bg-white rounded-2xl overflow-hidden flex">
             <LeftBar setActive={setActive} />
             <div className="p-6 w-full">

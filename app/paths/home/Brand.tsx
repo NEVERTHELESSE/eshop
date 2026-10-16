@@ -17,7 +17,7 @@ export default function Brand() {
   }, []);
   type d = { data: any; error: any };
   async function getProduct() {
-    const { data, error }: d = await supabase.from("topSeller").select("*");
+    const { data, error }: d = await supabase.from("product").select("*");
     if (error) {
       console.error(error);
       return;

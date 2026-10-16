@@ -167,9 +167,9 @@ export default function AdminAddProduct() {
             </h4>
             {productImage != "" && <Image src={productImage} alt="image" />}
           </div>
-          <button className="bg-secondary p-2" onClick={addImage}>
+          <div className="bg-secondary p-2" onClick={addImage}>
             Add image
-          </button>
+          </div>
           <div className="flex mt-3">
             {src.map((s, index) => (
               <div key={index} className="border size-20">
@@ -180,6 +180,7 @@ export default function AdminAddProduct() {
         </div>
       </div>
       <button
+        type="submit"
         className={`w-full ${loading ? "bg-soft" : "bg-primary"} font-bold text-white p-3 rounded-2xl my-5 cursor-pointer`}
       >
         Add Product

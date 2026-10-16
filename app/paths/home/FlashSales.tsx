@@ -62,7 +62,7 @@ export default function FlashSales() {
               key={product.id}
               className="box my-2 min-w-[49%]  md:w-[calc(100%/3.1)] lg:max-w-[calc(100%/6.2)] slg:min-w-[calc(100%/6.5)] mr-2 sm:mr-4 cursor-pointer overflow-hidden bg-white rounded-2xl"
             >
-              <div className=" w-full h-70  hover:scale-105 duration-200 ">
+              <div className=" w-full h-50 sm:h-70  hover:scale-105 duration-200 ">
                 <Link to={`product?${product.id}`}>
                   <Image src={product.src[0]} alt="bass" />
                 </Link>

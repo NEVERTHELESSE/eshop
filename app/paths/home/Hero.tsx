@@ -37,18 +37,21 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative w-full rounded-4xl my-4 overflow-hidden flex">
+    <section className="relative w-full rounded-4xl sm:my-4 overflow-hidden flex">
       <div
-        className=" w-full flex h-full duration-700 ease-out"
-        style={{
-          transform: `translateX(-${100 * active}%)`,
-        }}
+        className=" w-full flex 
+         sm:h-full duration-700 ease-out"
+        style={
+          {
+            // transform: `translateX(-${100 * active}%)`,
+          }
+        }
       >
         {details.map(({ id, imageUrl, title, color }) => (
           <div
             key={id}
 
-            className="min-w-full box flex items-center justify-between text-white my-5 slg:px-8  shadow-lg rounded-4xl overflow-hidden"
+            className="min-w-full h-full box flex items-center justify-between text-white my-5 slg:px-8  shadow-lg rounded-4xl overflow-hidden"
             style={{
               background: `linear-gradient(${color[0]}, ${color[1]})`,
             }}

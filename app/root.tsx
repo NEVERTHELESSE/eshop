@@ -69,7 +69,6 @@ export function Layout({ children }: { children: React.ReactNode }) {
             theme="light"
           />
 
-          {!resistHeader.includes(locate) && <Header />}
           <section className="w-full p-2 sm:p-4 slg:px-30">{children}</section>
           <Suspense fallback="loading">
             <Footer />

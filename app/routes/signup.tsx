@@ -55,8 +55,8 @@ export default function signup() {
   }
 
   return (
-    <main className="w-screen flex-col flex items-center justify-center h-screen -ml-20  ">
-      <div className="w-100 flex flex-col justify-center items-center rounded-2xl bg-white shadow-2xl sm:p-6 my-4">
+    <main className="w-screen flex-col flex items-center justify-center h-screen sm:-ml-20  ">
+      <div className="w-100 p-2 flex flex-col justify-center items-center rounded-2xl bg-white shadow-2xl sm:p-6 my-4">
         <Logo />
         <form action="" className="w-full" onSubmit={createAccount}>
           <h2 className="text-center">Kindly Create an Account</h2>

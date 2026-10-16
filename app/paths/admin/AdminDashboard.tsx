@@ -102,16 +102,16 @@ export default function AdminDashboard() {
   ];
 
   return (
-    <div className="my-6 flex flex-wrap justify-between overflow-y-scroll w-[60vw] h-full pb-20">
+    <div className="my-2 sm:my-6 flex flex-wrap justify-between overflow-y-scroll  h-full pb-20">
       {infos.map(({ id, title, numbersOfItems, imageUrl }) => (
         <div
           key={id}
-          className="bg-white hover:bg-primary cursor-pointer hover:shadow-2xl p-2 duration-700 mr-2 mb-2 rounded-2xl  shadow-lg size-45 flex flex-col justify-around items-center "
+          className="bg-white hover:bg-primary cursor-pointer hover:shadow-2xl p-2 duration-700 mr-2 mb-2 rounded-2xl  shadow-lg size-25 md:size-45 flex flex-col justify-around items-center "
         >
           <p className="capitalize">{title}</p>
-          <h2>{numbersOfItems}</h2>
+          <p className="sm:text-3xl font-bold">{numbersOfItems}</p>
 
-          <FaUser size={50} />
+          <FaUser className="text-2xl lg:text-5xl" />
         </div>
       ))}
     </div>

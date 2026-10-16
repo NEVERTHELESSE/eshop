@@ -36,16 +36,18 @@ export default function Header() {
   return (
     <div className="w-full">
       <header className="bg-[rgba(238, 236, 236, 0.5)] dark:text-white fixed  border-b dark:border-b-softD border-b-soft shadow glow z-100 py-2 lg:px-20 flex justify-between w-full md:py-4 items-center">
-        <div className=" hidden sm:flex">
+        <div className=" hidden md:flex">
           <Logo />
         </div>
         <Navigation />
         <Theme />
-        {isPending ? (
-          "loading"
-        ) : (
-          <>{!error ? <HeaderOption /> : <FreshAccount />}</>
-        )}
+        <div className="hidden sm:flex">
+          {isPending ? (
+            "loading"
+          ) : (
+            <>{!error ? <HeaderOption /> : <FreshAccount />}</>
+          )}
+        </div>
       </header>
       <div className="w-full h-10 md:h-18"></div>
     </div>

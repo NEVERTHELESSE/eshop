@@ -41,7 +41,6 @@ export default function FlashSalesInfo(cart: productType) {
         </div>
         <div className="flex pr-1 items-center justify-between">
           <div>
-            <p>(1848844)</p>
             <div className="flex my-2 items-center">
               <h4>₦ {cart.price.toLocaleString()}</h4>
               <h6 className="ml-2 bg-green-600 px-1 text-white rounded-lg">

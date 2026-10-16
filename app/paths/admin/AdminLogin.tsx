@@ -25,10 +25,10 @@ export default function AdminLogin({ setIsAdmin }: isAdmin) {
   }
 
   return (
-    <main className="w-screen flex-col flex items-center justify-center h-screen">
+    <main className="w-screen dark:bg-softD dark:text-white bg-soft flex-col flex items-center justify-center h-screen">
       <form
         action=""
-        className="w-100 rounded-2xl shadow-2xl sm:p-6 my-4"
+        className="w-100  rounded-2xl p-2 boxD  sm:p-6 my-4"
         onSubmit={loginAdmin}
       >
         <h2 className="text-center">

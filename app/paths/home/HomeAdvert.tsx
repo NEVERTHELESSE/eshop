@@ -12,7 +12,7 @@ export default function HomeAdvert() {
   ];
 
   return (
-    <main className="w-full box  flex px-2 py-4 rounded-2xl h-60 overflow-hidden justify-between my-7">
+    <main className="w-full box nobutton flex px-2 py-4 rounded-2xl h-60 overflow-x-scroll  sm:overflow-hidden justify-between my-7">
       {adverts.map((advert, index) => (
         <div
           key={index}

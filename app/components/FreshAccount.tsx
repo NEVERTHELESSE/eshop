@@ -10,7 +10,6 @@ export default function FreshAccount() {
   }
   return (
     <div className="relative">
-      <MdMenu />
       <button
         className="bg-linear-0 from-primary to-tertiary p-2 sm:px-10 text-white  rounded-full shadow cursor-pointer"
         onClick={toggleActive}
@@ -19,7 +18,7 @@ export default function FreshAccount() {
       </button>
       {/* <AnimateButton /> */}
       {active && (
-        <div className="absolute p-4 bg-white w-60 shadow-2xl rounded-2xl flex flex-col   text-white">
+        <div className="absolute p-4 bg-white w-60 shadow-2xl rounded-2xl flex flex-col  right-5 top-15 box text-white">
           <Link
             to="/signup"
             className="w-full text-center p-3 rounded-lg bg-secondary cursor-pointer hover:bg-primary duration-300"
