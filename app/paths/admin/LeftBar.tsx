@@ -62,7 +62,7 @@ export default function LeftBar({ setActive }: activeType) {
   ];
 
   return (
-    <div className="w-40 lg:min-w-70 text-white text-2xl bg-primary h-full">
+    <div className="w-40 lg:min-w-70 text-white md:text-2xl bg-primary h-full">
       <div className="py-7 w-15 mb-5 pb-2 px-3 flex items-center">
         <Image src="eshop.png" alt="logo" />
         <h2 className="ml-3 font-bold">Eshop</h2>
@@ -75,7 +75,7 @@ export default function LeftBar({ setActive }: activeType) {
           onClick={() => setActive(title)}
         >
           {icon}
-          <p className="ml-2 sm:text-3xl font-bold">{title}</p>
+          <p className="ml-2 md:text-3xl md:font-bold">{title}</p>
         </Link>
       ))}
     </div>

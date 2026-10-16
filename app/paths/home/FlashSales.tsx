@@ -3,21 +3,22 @@ import FlashSalesInfo from "./FlashSalesInfo";
 import Countdown from "~/components/Countdown";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import { Link } from "react-router";
-import { useEffect, useState } from "react";
 import { supabase } from "~/lib/supabase";
-import CartLoading from "~/loading/CartLoading";
 import SCartLoading from "~/loading/SCartLoading";
-import type { productType } from "~/types/type";
+import type { productType, reuse } from "~/types/type";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 
-export default function FlashSales() {
+export default function FlashSales({ title }: reuse) {
   type d = { data: any; error: any };
   function getProduct() {
     return useQuery({
-      queryKey: ["products"],
+      queryKey: [title],
       queryFn: async () => {
-        const { data, error }: d = await supabase.from("product").select("*");
+        const { data, error }: d = await supabase
+          .from("product")
+          .select("*")
+          .eq("deal_type", title);
         if (error) {
           toast(
             "There was an error while loading product, kindly check you internet connection",
@@ -28,22 +29,15 @@ export default function FlashSales() {
         }
       },
     });
-
-    // if (error) {
-    //   console.error(error);
-    //   return;
-    // } else {
-    //   setProducts(data);
-    // }
   }
   const { data, isPending, isError } = getProduct();
 
   return (
-    <main className="w-full box shadow-lg my-4 rounded-2xl dark:bg-tertiaryD bg-tertiary  p-2 sm:p-4">
+    <main className="w-full box shadow-lg my-4 rounded-2xl dark:bg-tertiaryD bg-tertiary  p-1 sm:p-4">
       <div className="flex justify-between mb-3">
         <div className="flex items-center">
           <p className="text-2xl sm:text-4xl  text-white mr-3 font-bold  ">
-            Flash Sales
+            {title}
           </p>
           <Countdown />
         </div>
@@ -60,7 +54,7 @@ export default function FlashSales() {
             <div
               // to={title}
               key={product.id}
-              className="box my-2 min-w-[49%]  md:w-[calc(100%/3.1)] lg:max-w-[calc(100%/6.2)] slg:min-w-[calc(100%/6.5)] mr-2 sm:mr-4 cursor-pointer overflow-hidden bg-white rounded-2xl"
+              className="boxD my-2 min-w-[49%]  md:w-[calc(100%/3.1)] lg:max-w-[calc(100%/5.2)] slg:min-w-[calc(100%/6.5)] mr-2 sm:mr-4 cursor-pointer overflow-hidden bg-white rounded-2xl"
             >
               <div className=" w-full h-50 sm:h-70  hover:scale-105 duration-200 ">
                 <Link to={`product?${product.id}`}>

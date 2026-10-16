@@ -31,10 +31,10 @@ export default function Navigation() {
   }
 
   return (
-    <section className="px-2  mx-2 md:p-0 w-full md:w-[50vw] ">
+    <section className="  mx-2 md:p-0 w-full md:w-[50vw] ">
       <form
         action=""
-        className="bg-soft dark:bg-softD relative z-70 w-full mx-2 p-2 flex items-center pl-2 sm:pl-4 rounded-full"
+        className="bg-soft dark:bg-softD relative z-70 w-full mr-2 p-2 flex items-center pl-2 sm:pl-4 rounded-full"
       >
         <FaSearch className="text-gray-500 hidden sm:flex " />
         <input

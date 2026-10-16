@@ -2,9 +2,12 @@ import { lazy, Suspense } from "react";
 import AdvertLoading from "~/loading/AdvertLoading";
 import CategoryLoading from "~/loading/CategoryLoading";
 import HeroLoading from "~/loading/HeroLoading";
-import FlashSales from "~/paths/home/FlashSales";
 import Hero from "../paths/home/Hero";
 import HomeAdvert from "~/paths/home/HomeAdvert";
+import FlashSales from "~/paths/home/FlashSales";
+import Most from "~/paths/home/Most";
+import Brand from "~/paths/home/Brand";
+import Light from "~/paths/home/Light";
 
 const Categories = lazy(() => import("../paths/home/Categories"));
 const HomeDeals = lazy(() => import("../paths/home/HomeDeals"));
@@ -29,7 +32,6 @@ export default function home() {
       <Hero />
       <Categories />
       <HomeAdvert />
-      <FlashSales />
       {/* <Suspense fallback={<AdvertLoading />}>
         <Voucher />
       </Suspense> */}
@@ -37,9 +39,23 @@ export default function home() {
         <HomeDeals />
       </Suspense> */}
 
-      <Suspense fallback={<AdvertLoading />}>
-        <Reuse />
-      </Suspense>
+      <FlashSales title="Flash Sales" />
+      <Most title="Top Seller" />
+      <Brand title="Xiamoi Brand" />
+      <Light title={"Fans Deals"} />
+      <Light title={"Smart TV's"} />
+      <Most title="outdoor & garden" />
+      <Light title={"Xiaomi Official Store"} />
+      <Most title="Unilever Official Store" />
+      <Light title={"Beyond the brand"} />
+      <Light title={"computing deals"} />
+      <Most title="mobile accessories deal" />
+      <FlashSales title="Flash Sales" />
+      <Most title="grocery deal - wines & more" />
+      <Most title="girls fashion" />
+      <Light title={"hot deals right now"} />
+      <Light title={"games & console"} />
+      <Most title="upto 80% off" />
     </section>
   );
 }

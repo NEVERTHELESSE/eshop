@@ -11,10 +11,8 @@ export default function Theme() {
 
   // window.matchMedia("(prefers-color-scheme: dark)").matches;
   return (
-    <div>
-      <button className="cursor-pointer ml-2 text-2xl" onClick={changeTheme}>
-        {isLight ? <FaMoon /> : <FaSun />}
-      </button>
-    </div>
+    <button className="cursor-pointer mx-2 sm:text-2xl" onClick={changeTheme}>
+      {isLight ? <FaMoon /> : <FaSun />}
+    </button>
   );
 }

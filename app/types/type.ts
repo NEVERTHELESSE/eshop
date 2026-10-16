@@ -9,8 +9,7 @@ export type productType = {
   rate: number;
   id: number;
   src: string[];
-  created_at: string;
-  numberofItem: number;
+  numberOfItem: number;
 };
 export type productDetailType = {
   title: string;

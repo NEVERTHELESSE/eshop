@@ -8,6 +8,7 @@ export default function AdminAddProduct() {
 
   function addImage() {
     setSrc((prev) => [...prev, productImage]);
+    setProductImage("");
   }
 
   const [productDetails, setProductDetails] = useState({
@@ -31,6 +32,7 @@ export default function AdminAddProduct() {
       numberOfProduct: productDetails.numberOfProduct,
       quantity: productDetails.quantity,
       description: productDetails.description,
+      deal_type: deal,
     });
     if (error) {
       toast("There was an error while adding product kidnly try again", {
@@ -51,11 +53,27 @@ export default function AdminAddProduct() {
       setLoading(false);
     }
   }
-
+  const dealsTypes = [
+    "Flash Sales",
+    "Top Seller",
+    "Xiamoi Brand",
+    "Fans Deals",
+    "Smart TV's",
+    "outdoor & garden",
+    "Xiaomi Official Store",
+    "Unilever Official Store",
+    "Beyond the brand",
+    "computing deals",
+    "mobile accessories deal",
+  ];
+  const [deal, setDeal] = useState("");
   return (
-    <form className="w-[60vw] border-t py-4 " onSubmit={addProduct}>
-      <div className="flex justify-between">
-        <div className="w-[50%]">
+    <form
+      className="w-full border-t py-4 overflow-scroll "
+      onSubmit={addProduct}
+    >
+      <div className="md:flex justify-between">
+        <div className="w-full md:w-[50%]">
           <div className="w-full mb-2">
             <p>Title</p>
             <input
@@ -71,7 +89,7 @@ export default function AdminAddProduct() {
               }
             />
           </div>
-          <div className="flex">
+          <div className="md:flex">
             <div className="w-full mr-2 mb-2">
               <p>Price</p>
               <input
@@ -135,6 +153,21 @@ export default function AdminAddProduct() {
               />
             </div>
           </div>
+          <div className="flex">
+            <select
+              onChange={(e) => setDeal(e.target.value)}
+              name="deals"
+
+              className="p-3 rounded-2xl border"
+              id="deals"
+            >
+              {dealsTypes.map((dealsType) => (
+                <option value={dealsType} key={dealsType}>
+                  {dealsType}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="w-full mb-2">
             <p>Description</p>
             <textarea
@@ -154,6 +187,7 @@ export default function AdminAddProduct() {
           <input
             type="text"
             className="p-4 rounded-lg border w-full "
+            value={productImage}
             placeholder="Paste image url here"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setProductImage(e.target.value)

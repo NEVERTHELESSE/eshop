@@ -50,10 +50,10 @@ export default function FlashSalesInfo(cart: productType) {
           </div>
           <button
             onClick={addItem}
-            className="shadow-lg cursor-pointer  p-2 rounded-lg"
+            className="shadow-lg cursor-pointer p-1  sm:p-2 rounded-lg"
             title="add to cart"
           >
-            <FaShoppingCart size={30} />
+            <FaShoppingCart className="text-[20px] sm:text-3xl" />
           </button>
         </div>
       </div>
